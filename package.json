@@ -1,0 +1,46 @@
+{
+  "name": "saban-tabs",
+  "version": "1.0.0",
+  "type": "module",
+  "description": "A test component library",
+  "main": "./dist/saban-tabs.umd.js",
+  "module": "./dist/saban-tabs.js",
+  "types": "./dist/index.d.ts",
+  "scripts": {
+    "dev": "vite --port 3000 --open",
+    "build": "vue-tsc && vite build",
+    "preview": "vite preview"
+  },
+  "exports": {
+    ".": {
+      "import": "./dist/saban-tabs.js",
+      "require": "./dist/saban-tabs.umd.js"
+    }
+  },
+  "files": [
+    "dist",
+    "src"
+  ],
+  "keywords": [
+    "vue",
+    "vue3",
+    "component",
+    "library"
+  ],
+  "dependencies": {
+    "@vueuse/core": "^10.8.0",
+    "vue": "^3.4.19"
+  },
+  "devDependencies": {
+    "@types/node": "^20.11.20",
+    "@vitejs/plugin-vue": "^5.0.4",
+    "autoprefixer": "^10.4.17",
+    "less": "^4.2.0",
+    "postcss": "^8.4.35",
+    "tailwindcss": "^3.4.1",
+    "typescript": "^5.2.2",
+    "vite": "^5.1.4",
+    "vite-plugin-dts": "^3.7.3",
+    "vue-tsc": "^1.8.27"
+  }
+}
