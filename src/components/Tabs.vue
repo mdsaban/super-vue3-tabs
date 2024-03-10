@@ -1,36 +1,56 @@
 <script setup lang="ts">
-import { onMounted, onUnmounted, provide, watch, ref, computed, Prop } from "vue";
+import {
+  onMounted,
+  onUnmounted,
+  provide,
+  watch,
+  ref,
+  computed,
+  ComponentPublicInstance,
+  Ref,
+} from "vue";
 import { useElementVisibility } from "@vueuse/core";
 
 interface Props {
   primaryColor?: string;
+}
+// TODO: extract to a separate file
+interface Tab {
+  id: string;
+  value: string;
+  disabled?: boolean;
+  computedTabId?: string;
+}
+
+interface TabVisibility {
+  [key: string]: Ref<boolean>;
 }
 
 const props = withDefaults(defineProps<Props>(), {
   primaryColor: "#3b82f6",
 });
 
-
 const tabsContainerRef = ref<HTMLDivElement | null>(null);
-const tabs = ref([]);
-const activeTab = ref({});
-const tabElems = ref([]);
-const tabsVisibility = ref({});
+const tabs = ref<Tab[]>([]);
+const activeTab = ref<Tab>({ id: "", value: "" });
+const tabElems = ref<(ComponentPublicInstance | null | Element)[]>([]);
+const tabsVisibility = ref<TabVisibility>({});
 const showDropdown = ref(false);
 
 const watchTabsVisibility = () => {
   for (let index in tabElems.value) {
-    tabsVisibility.value[tabs.value[index].id] = useElementVisibility(
-      tabElems.value[index]
+    const isVisible = useElementVisibility(
+      tabElems.value[index] as HTMLElement
     );
+    tabsVisibility.value[tabs.value[index].id] = isVisible;
   }
 };
 
 const dropwDownList = computed(() => {
-  return tabs.value.filter((tab) => !tabsVisibility.value[tab.id]);
+  return tabs.value.filter((tab: Tab) => !tabsVisibility.value[tab.id]);
 });
 
-const addTabs = (tab) => {
+const addTabs = (tab: Tab) => {
   tabs.value.push(tab);
 };
 
@@ -39,21 +59,24 @@ provide("activeTab", activeTab);
 
 watch(tabElems.value, watchTabsVisibility);
 
-const scrollHorizontally = function (e) {
+const scrollHorizontally = function (e: WheelEvent) {
   if (e.deltaY == 0 || !tabsContainerRef.value) return;
   e.preventDefault();
   tabsContainerRef.value.scrollLeft += e.deltaY;
 };
 
-const selectTab = (tab) => {
-  showDropdown.value = false
+const selectTab = (tab: Tab) => {
+  showDropdown.value = false;
   const id = tab.id;
   const tabIndex = tabs.value.findIndex((tab) => tab.id === id);
-  const elem = tabElems.value[tabIndex]
+  const elem: HTMLDivElement = tabElems.value[tabIndex] as HTMLDivElement;
   if (elem) {
-    elem.parentElement.scrollIntoView({ behavior: "smooth",  block: 'nearest'})
+    elem?.parentElement?.scrollIntoView({
+      behavior: "smooth",
+      block: "nearest",
+    });
   }
-  
+
   activeTab.value = tab;
 };
 
@@ -70,7 +93,7 @@ onUnmounted(() => {
 
 <template>
   <div>
-    <div class="flex gap-2">  
+    <div class="flex gap-2">
       <div class="flex gap-3 tabs" ref="tabsContainerRef">
         <div
           v-for="(tab, index) in tabs"
@@ -83,7 +106,8 @@ onUnmounted(() => {
           }"
           :style="{
             color: activeTab.id === tab.id ? props.primaryColor : '',
-            borderBottomColor: activeTab.id === tab.id ? props.primaryColor : '',
+            borderBottomColor:
+              activeTab.id === tab.id ? props.primaryColor : '',
           }"
           @click="tab.disabled ? '' : selectTab(tab)"
         >
@@ -99,11 +123,16 @@ onUnmounted(() => {
         </div>
       </div>
       <div v-if="dropwDownList.length" @mouseleave="showDropdown = false">
-        <button class="w-6 h-full" @mouseover="showDropdown = true ">
+        <button class="w-6 h-full" @mouseover="showDropdown = true">
           <img src="@/assets/menu.svg" width="16" class="m-auto" />
         </button>
         <div class="dropdown" v-if="showDropdown">
-          <div v-for="tab in dropwDownList" :key="tab.id" @click="selectTab(tab)" class="cursor-pointer">
+          <div
+            v-for="tab in dropwDownList"
+            :key="tab.id"
+            @click="selectTab(tab)"
+            class="cursor-pointer"
+          >
             {{ tab.value }}
           </div>
         </div>
