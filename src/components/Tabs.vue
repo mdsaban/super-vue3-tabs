@@ -1,9 +1,17 @@
 <script setup lang="ts">
-import { onMounted, onUnmounted, provide, watch, ref, computed } from "vue";
+import { onMounted, onUnmounted, provide, watch, ref, computed, Prop } from "vue";
 import { useElementVisibility } from "@vueuse/core";
 
-const sabanTabsRef = ref<HTMLDivElement | null>(null);
+interface Props {
+  primaryColor?: string;
+}
 
+const props = withDefaults(defineProps<Props>(), {
+  primaryColor: "#3b82f6",
+});
+
+
+const tabsContainerRef = ref<HTMLDivElement | null>(null);
 const tabs = ref([]);
 const activeTab = ref({});
 const tabElems = ref([]);
@@ -32,9 +40,9 @@ provide("activeTab", activeTab);
 watch(tabElems.value, watchTabsVisibility);
 
 const scrollHorizontally = function (e) {
-  if (e.deltaY == 0 || !sabanTabsRef.value) return;
+  if (e.deltaY == 0 || !tabsContainerRef.value) return;
   e.preventDefault();
-  sabanTabsRef.value.scrollLeft += e.deltaY;
+  tabsContainerRef.value.scrollLeft += e.deltaY;
 };
 
 const selectTab = (tab) => {
@@ -50,28 +58,32 @@ const selectTab = (tab) => {
 };
 
 onMounted(() => {
-  sabanTabsRef.value?.addEventListener("wheel", scrollHorizontally);
+  tabsContainerRef.value?.addEventListener("wheel", scrollHorizontally);
   if (!tabs.value.length) return;
   selectTab(tabs.value[0]);
 });
 
 onUnmounted(() => {
-  sabanTabsRef.value?.removeEventListener("wheel", scrollHorizontally);
+  tabsContainerRef.value?.removeEventListener("wheel", scrollHorizontally);
 });
 </script>
 
 <template>
   <div>
     <div class="flex gap-2">  
-      <div class="flex gap-3 tabs" ref="sabanTabsRef">
+      <div class="flex gap-3 tabs" ref="tabsContainerRef">
         <div
           v-for="(tab, index) in tabs"
           :key="index"
           :id="tab.id"
           class="relative px-3 py-2 rounded-sm cursor-pointer min-w-max"
           :class="{
-            'border-b-2 border-blue-500 text-blue-500': activeTab.id === tab.id,
+            'border-b-2': activeTab.id === tab.id,
             'opacity-50 !cursor-default': tab.disabled,
+          }"
+          :style="{
+            color: activeTab.id === tab.id ? props.primaryColor : '',
+            borderBottomColor: activeTab.id === tab.id ? props.primaryColor : '',
           }"
           @click="tab.disabled ? '' : selectTab(tab)"
         >
@@ -117,6 +129,8 @@ onUnmounted(() => {
   position: absolute;
   background-color: #f8f8f8;
   min-width: 140px;
+  max-height: 300px;
+  overflow: auto;
   box-shadow: 0px 4px 20px -2px rgba(0, 0, 0, 0.1);
   z-index: 1;
   border-radius: 8px;
