@@ -1,3 +1,3 @@
-import VueTabs from './components/VueTabs.vue';
+import Tabs from './components/Tabs.vue';
 
-export { VueTabs };
+export { Tabs };
