@@ -7,18 +7,18 @@ A Vue 3 component for creating tabbed interfaces easily.
 
 ## Installation
 ```bash
-npm install vue3-tabs-component
+npm i super-vue3-tabs
 ```
 or use yarn
 ```bash
-yarn add vue3-tabs-component
+yarn add super-vue3-tabs
 ```
 
 ## Usage
 In your Vue 3 project, import the component where you need to use it:
 
 ```javascript
-import { Tabs, Tab } from 'vue3-tabs-component';
+import { Tabs, Tab } from 'super-vue3-tabs';
 ```
 
 **Tabs Component** - The Tabs component wraps your tab elements. It manages the state of the tabs and their content.
@@ -28,20 +28,20 @@ import { Tabs, Tab } from 'vue3-tabs-component';
 ```vue
 <template>
   <Tabs>
-    <Tab title="Tab 1">
+    <Tab value="Tab 1">
       <p>This is the content of Tab 1</p>
     </Tab>
-    <Tab :disabled="true" title="Tab 2">
+    <Tab :disabled="true" value="Tab 2">
       <p>This is the content of Tab 2</p>
     </Tab>
-    <Tab title="Tab 2">
+    <Tab value="Tab 2">
       <p>This is the content of Tab 2</p>
     </Tab>
   </Tabs>
 </template>
 
 <script setup>
-import { Tabs, Tab } from 'vue3-tabs-component'
+import { Tabs, Tab } from 'super-vue3-tabs'
 </script>
 ```
 
@@ -50,21 +50,20 @@ import { Tabs, Tab } from 'vue3-tabs-component'
 ### Tabs Component
 | Prop | Type | Default | Description |
 | --- | --- | --- | --- |
-| defaultTab | Number | 0 | The index of the tab to be displayed by default. |
-| align | String | 'left' | The alignment of the tabs. Possible values: 'left', 'center', 'right' |
+| primaryColor | String | #3b82f6 | Theme color of the tab, pass hexcode for custom color |
 
 
 ### Tab Component
 | Prop | Type | Default | Description |
 | --- | --- | --- | --- |
-| title | String | - | The title of the tab. |
+| value | String | - | The title of the tab. |
 | disabled | Boolean | false | Whether the tab is disabled. |
-| icon | String | - | The icon to be displayed next to the tab title. |
-| iconPosition | String | 'left' | The position of the icon. Possible values: 'left', 'right' |
-
+| id | String | - | The html id of the tab. |
 
 ## Events
 
+Will be added soon.
+<!-- 
 ### Tabs Component
 
 | Event | Description |
@@ -76,4 +75,4 @@ import { Tabs, Tab } from 'vue3-tabs-component'
 | Event | Description |
 | --- | --- |
 | click | Emitted when the tab is clicked. The event payload is the index of the tab. |
-
+ -->
