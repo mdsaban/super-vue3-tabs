@@ -14,9 +14,9 @@ export default defineConfig({
   build: {
     lib: {
       entry: resolve(__dirname, 'src/index.ts'),
-      name: 'SabanTabs',
+      name: 'SuperVue3Tabs',
       // the proper extensions will be added
-      fileName: 'saban-tabs'
+      fileName: 'super-vue3-tabs'
     },
     rollupOptions: {
       // make sure to externalize deps that shouldn't be bundled

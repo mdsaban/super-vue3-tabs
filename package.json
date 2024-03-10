@@ -1,10 +1,10 @@
 {
-  "name": "saban-tabs",
+  "name": "super-vue3-tabs",
   "version": "1.0.0",
   "type": "module",
-  "description": "A test component library",
-  "main": "./dist/saban-tabs.umd.js",
-  "module": "./dist/saban-tabs.js",
+  "description": "A vue3 tabs component for showing tabs and tab content.",
+  "main": "./dist/super-vue3-tabs.umd.js",
+  "module": "./dist/super-vue3-tabs.js",
   "types": "./dist/index.d.ts",
   "scripts": {
     "dev": "vite --port 3000 --open",
@@ -13,20 +13,23 @@
   },
   "exports": {
     ".": {
-      "import": "./dist/saban-tabs.js",
-      "require": "./dist/saban-tabs.umd.js"
+      "import": "./dist/super-vue3-tabs.js",
+      "require": "./dist/super-vue3-tabs.umd.js"
     }
   },
-  "files": [
-    "dist",
-    "src"
-  ],
+  "files": [ "dist"],
   "keywords": [
     "vue",
     "vue3",
-    "component",
-    "library"
+    "tabs",
+    "vue3-tabs",
+    "tabs-component"
   ],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/mdsaban/super-vue3-tabs"
+  },
+  "homepage": "https://github.com/mdsaban/super-vue3-tabs",
   "dependencies": {
     "@vueuse/core": "^10.8.0",
     "vue": "^3.4.19"
