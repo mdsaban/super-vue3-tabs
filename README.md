@@ -17,7 +17,7 @@ yarn add vue3-tabs-component
 ## Usage
 In your Vue 3 project, import the component where you need to use it:
 
-```vue
+```javascript
 import { Tabs, Tab } from 'vue3-tabs-component';
 ```
 
