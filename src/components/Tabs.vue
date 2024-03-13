@@ -30,6 +30,10 @@ const props = withDefaults(defineProps<Props>(), {
   primaryColor: "#3b82f6",
 });
 
+const emit = defineEmits<{
+  (e: 'change', tab: Tab): void
+}>();
+
 const tabsContainerRef = ref<HTMLDivElement | null>(null);
 const tabs = ref<Tab[]>([]);
 const activeTab = ref<Tab>({ id: "", value: "" });
@@ -78,6 +82,7 @@ const selectTab = (tab: Tab) => {
   }
 
   activeTab.value = tab;
+  emit('change', tab);
 };
 
 onMounted(() => {

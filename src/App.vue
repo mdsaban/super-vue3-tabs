@@ -1,6 +1,19 @@
 <script setup lang="ts">
 import Tabs from "@/components/Tabs.vue";
 import Tab from "@/components/Tab.vue";
+
+// TODO: extract to a separate file
+interface Tab {
+  id: string;
+  value: string;
+  disabled?: boolean;
+  computedTabId?: string;
+}
+
+const tabChanged = (tab: Tab) => {
+  console.log(tab);
+};
+
 </script>
 
 <template>
@@ -12,7 +25,7 @@ import Tab from "@/components/Tab.vue";
     </div>
     <h1 class="mb-4 text-xl font-semibold">Demo 1</h1>
     <div class="p-4 bg-white border rounded-lg">
-      <Tabs>
+      <Tabs @change="tabChanged">
         <Tab
           v-for="index in 16"
           :key="index"

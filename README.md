@@ -2,7 +2,7 @@
 
 A Vue 3 component for creating tabbed interfaces easily.
 
-![Super tabs demo](./public/demo.gif)
+![Super tabs demo](./github_images/demo.gif)
 #### Try live demo [here](https://mdsaban.com). If you face any issue, please raise it [here](#).
 
 ## Installation
@@ -62,8 +62,6 @@ import { Tabs, Tab } from 'super-vue3-tabs'
 
 ## Events
 
-Will be added soon.
-<!-- 
 ### Tabs Component
 
 | Event | Description |
@@ -71,7 +69,8 @@ Will be added soon.
 | change | Emitted when the active tab changes. The event payload is the index of the new active tab. |
 
 ### Tab Component
-
+TODO: add event for tab 
+<!-- 
 | Event | Description |
 | --- | --- |
 | click | Emitted when the tab is clicked. The event payload is the index of the tab. |
