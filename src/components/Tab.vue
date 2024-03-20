@@ -1,11 +1,12 @@
 <script setup lang="ts">
-import { inject, onBeforeMount, computed, ref } from "vue";
+import { inject, onBeforeMount, computed, ref, useSlots } from "vue";
 
 interface Tab {
   id?: string;
   value: string;
   disabled?: boolean;
   computedTabId?: string;
+  icon?: any
 }
 
 const props = defineProps<{
@@ -13,6 +14,8 @@ const props = defineProps<{
   value: string;
   disabled?: boolean;
 }>();
+
+const tabDetail = ref({} as Tab);
 
 const addTabs = inject("addTabs", (tab: Tab) => {console.log(tab)});
 const activeTab = inject("activeTab", ref({id: '', value: ''}));
@@ -22,10 +25,12 @@ const computedTabId = computed(() => {
 }) 
 
 const isActive = computed(() =>  activeTab?.value?.id === computedTabId.value);
+const slots = useSlots()
 
 onBeforeMount(() => {
-    let tab = {...props}
+    let tab = {...props, icon: slots?.icon}
     if(!tab.id) tab.id = computedTabId.value
+    tabDetail.value = tab
     addTabs(tab);
 });
 </script>

@@ -20,6 +20,7 @@ interface Tab {
   value: string;
   disabled?: boolean;
   computedTabId?: string;
+  icon?: any
 }
 
 interface TabVisibility {
@@ -99,12 +100,13 @@ onUnmounted(() => {
 <template>
   <div>
     <div class="flex gap-2">
+      <!-- Tabs list -->
       <div class="flex gap-3 tabs" ref="tabsContainerRef">
         <div
           v-for="(tab, index) in tabs"
           :key="index"
           :id="tab.id"
-          class="relative px-3 py-2 rounded-sm cursor-pointer min-w-max"
+          class="relative flex px-3 py-2 rounded-sm cursor-pointer min-w-max"
           :class="{
             'border-b-2': activeTab.id === tab.id,
             'opacity-50 !cursor-default': tab.disabled,
@@ -124,9 +126,17 @@ onUnmounted(() => {
               }
             "
           ></div>
+          <component 
+            v-if="tab.icon" 
+            v-for="(node, index) in tab.icon()" 
+            :key="index" 
+            :is="node" 
+          />
           {{ tab.value }}
         </div>
       </div>
+
+      <!-- Dropdown -->
       <div v-if="dropwDownList.length" @mouseleave="showDropdown = false">
         <button class="w-6 h-full" @mouseover="showDropdown = true">
           <img src="@/assets/menu.svg" width="16" class="m-auto" />
@@ -138,11 +148,19 @@ onUnmounted(() => {
             @click="selectTab(tab)"
             class="cursor-pointer"
           >
+            <component 
+              v-if="tab.icon" 
+              v-for="(node, index) in tab.icon()" 
+              :key="index" 
+              :is="node" 
+            />
             {{ tab.value }}
           </div>
         </div>
       </div>
     </div>
+
+    <!-- Tabs Content -->
     <div class="content">
       <slot></slot>
     </div>
