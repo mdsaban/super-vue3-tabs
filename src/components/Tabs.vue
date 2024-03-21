@@ -1,4 +1,6 @@
 <script setup lang="ts">
+// This css import is for getting tailwind css
+import '../styles/styles.css';
 import {
   onMounted,
   onUnmounted,

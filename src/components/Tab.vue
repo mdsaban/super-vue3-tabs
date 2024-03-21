@@ -1,4 +1,5 @@
 <script setup lang="ts">
+import '../styles/styles.css';
 import { inject, onBeforeMount, computed, ref, useSlots } from "vue";
 
 interface Tab {

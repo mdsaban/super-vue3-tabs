@@ -1,6 +1,6 @@
 {
   "name": "super-vue3-tabs",
-  "version": "1.2.0",
+  "version": "1.2.2",
   "type": "module",
   "description": "A vue3 tabs component for showing tabs and tab content.",
   "main": "./dist/super-vue3-tabs.umd.js",
@@ -17,7 +17,9 @@
       "require": "./dist/super-vue3-tabs.umd.js"
     }
   },
-  "files": [ "dist"],
+  "files": [
+    "dist"
+  ],
   "keywords": [
     "vue",
     "vue3",
@@ -45,6 +47,7 @@
     "tailwindcss": "^3.4.1",
     "typescript": "^5.2.2",
     "vite": "^5.1.4",
+    "vite-plugin-css-injected-by-js": "^3.5.0",
     "vite-plugin-dts": "^3.7.3",
     "vue-tsc": "^1.8.27"
   }

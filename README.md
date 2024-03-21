@@ -34,8 +34,8 @@ import { Tabs, Tab } from 'super-vue3-tabs';
     <Tab :disabled="true" value="Tab 2">
       <p>This is the content of Tab 2</p>
     </Tab>
-    <Tab value="Tab 2">
-      <p>This is the content of Tab 2</p>
+    <Tab value="Tab 3">
+      <p>This is the content of Tab 3</p>
     </Tab>
   </Tabs>
 </template>
