@@ -23,7 +23,9 @@
     "vue3",
     "tabs",
     "vue3-tabs",
-    "tabs-component"
+    "tabs-component",
+    "Vue tabs component",
+    "vue3 tabs component"
   ],
   "repository": {
     "type": "git",
