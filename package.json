@@ -1,6 +1,6 @@
 {
   "name": "super-vue3-tabs",
-  "version": "1.0.1",
+  "version": "1.2.0",
   "type": "module",
   "description": "A vue3 tabs component for showing tabs and tab content.",
   "main": "./dist/super-vue3-tabs.umd.js",
@@ -22,8 +22,8 @@
     "vue",
     "vue3",
     "tabs",
-    "vue3-tabs",
-    "tabs-component",
+    "vue3 tabs",
+    "tabs component",
     "Vue tabs component",
     "vue3 tabs component"
   ],
