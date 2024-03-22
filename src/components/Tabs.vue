@@ -100,7 +100,7 @@ onUnmounted(() => {
 </script>
 
 <template>
-  <div>
+  <div class="super-vue3-tabs">
     <div class="flex gap-2">
       <!-- Tabs list -->
       <div class="flex gap-3 tabs" ref="tabsContainerRef">
@@ -108,7 +108,7 @@ onUnmounted(() => {
           v-for="(tab, index) in tabs"
           :key="index"
           :id="tab.id"
-          class="relative flex px-3 py-2 rounded-sm cursor-pointer min-w-max"
+          class="relative flex items-center px-3 py-2 rounded-sm cursor-pointer min-w-max"
           :class="{
             'border-b-2': activeTab.id === tab.id,
             'opacity-50 !cursor-default': tab.disabled,
@@ -169,34 +169,36 @@ onUnmounted(() => {
   </div>
 </template>
 
-<style lang="less" scoped>
+<style lang="less">
 // make tabs scroll horizontally
-.tabs {
-  overflow-x: auto;
-  user-select: none;
-  &::-webkit-scrollbar {
-    display: none;
-  }
-}
-
-.dropdown {
-  position: absolute;
-  background-color: #f8f8f8;
-  min-width: 140px;
-  max-height: 300px;
-  overflow: auto;
-  box-shadow: 0px 4px 20px -2px rgba(0, 0, 0, 0.1);
-  z-index: 1;
-  border-radius: 8px;
-  div {
-    padding: 8px 12px;
-    margin: 4px;
-    text-decoration: none;
-    display: block;
-    &:hover {
-      background-color: #f1f1f1;
-      border-radius: 8px;
+.super-vue3-tabs {
+  .tabs {
+    overflow-x: auto;
+    user-select: none;
+    &::-webkit-scrollbar {
+      display: none;
     }
   }
-}
+  
+  .dropdown {
+    position: absolute;
+    background-color: #f8f8f8;
+    min-width: 140px;
+    max-height: 300px;
+    overflow: auto;
+    box-shadow: 0px 4px 20px -2px rgba(0, 0, 0, 0.1);
+    z-index: 1;
+    border-radius: 8px;
+    div {
+      padding: 8px 12px;
+      margin: 4px;
+      text-decoration: none;
+      display: block;
+      &:hover {
+        background-color: #f1f1f1;
+        border-radius: 8px;
+      }
+    }
+  }
+} 
 </style>

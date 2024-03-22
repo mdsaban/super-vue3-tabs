@@ -3,7 +3,7 @@
 A Vue 3 component for creating tabbed interfaces easily.
 
 ![Super tabs demo](./github_images/demo.gif)
-#### Try live demo [here](https://mdsaban.com). If you face any issue, please raise it [here](#).
+#### Try live demo [here](https://mdsaban.com/packages/super-vue3-tabs-component/demo/). If you face any issue, please raise it [here](#).
 
 ## Installation
 ```bash
@@ -43,6 +43,34 @@ import { Tabs, Tab } from 'super-vue3-tabs';
 <script setup>
 import { Tabs, Tab } from 'super-vue3-tabs'
 </script>
+```
+
+### Icon slots
+
+You can also pass icons to the tabs using the `icon` slot. The icon will be displayed before the tab title.
+
+```vue
+<template>
+  <Tabs>
+    <Tab value="Tab 1">
+      <template #icon>
+        <i class="fas fa-home"></i>
+      </template>
+      <p>This is the content of Tab 1</p>
+    </Tab>
+    <Tab value="Tab 2">
+      <template #icon>
+        <i class="fas fa-user"></i>
+      </template>
+      <p>This is the content of Tab 2</p>
+    </Tab>
+    <Tab value="Tab 3">
+      <template #icon>
+        <i class="fas fa-cog"></i>
+      </template>
+      <p>This is the content of Tab 3</p>
+    </Tab>
+  </Tabs>
 ```
 
 ## Props

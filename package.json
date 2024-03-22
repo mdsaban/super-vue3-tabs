@@ -1,6 +1,6 @@
 {
   "name": "super-vue3-tabs",
-  "version": "1.2.2",
+  "version": "1.2.3",
   "type": "module",
   "description": "A vue3 tabs component for showing tabs and tab content.",
   "main": "./dist/super-vue3-tabs.umd.js",
@@ -33,7 +33,7 @@
     "type": "git",
     "url": "https://github.com/mdsaban/super-vue3-tabs"
   },
-  "homepage": "https://github.com/mdsaban/super-vue3-tabs",
+  "homepage": "https://mdsaban.com/packages/super-vue3-tabs-component/demo/",
   "dependencies": {
     "@vueuse/core": "^10.8.0",
     "vue": "^3.4.19"
