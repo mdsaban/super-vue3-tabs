@@ -1,9 +1,8 @@
 # Super Vue 3 Tabs Component
 
 A Vue 3 component for creating tabbed interfaces easily.
-
+### Try live demo [here](https://mdsaban.com/packages/super-vue3-tabs-component/demo/). If you face any issue, please raise it [here](https://github.com/mdsaban/super-vue3-tabs/issues/new).
 ![Super tabs demo](./github_images/demo.gif)
-#### Try live demo [here](https://mdsaban.com/packages/super-vue3-tabs-component/demo/). If you face any issue, please raise it [here](#).
 
 ## Installation
 ```bash
