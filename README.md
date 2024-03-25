@@ -108,7 +108,7 @@ const tabChanged = (tab) => {
 | Prop | Type | Default | Description |
 | --- | --- | --- | --- |
 | v-model | String | - | Current Tab's value |
-| primaryColor | String | #3b82f6 | Theme color of the tab, pass hexcode for custom color |
+| themeColor | String | #3b82f6 | Theme color of the tab, pass hexcode for custom color |
 
 
 ### Tab Component

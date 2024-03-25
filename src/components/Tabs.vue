@@ -14,7 +14,7 @@ import {
 import { useElementVisibility } from "@vueuse/core";
 
 interface Props {
-  primaryColor?: string;
+  themeColor?: string;
 }
 // TODO: extract to a separate file
 interface Tab {
@@ -30,7 +30,7 @@ interface TabVisibility {
 }
 
 const props = withDefaults(defineProps<Props>(), {
-  primaryColor: "#3b82f6",
+  themeColor: "#3b82f6",
 });
 
 const emit = defineEmits<{
@@ -56,6 +56,17 @@ const watchTabsVisibility = () => {
 
 const dropwDownList = computed(() => {
   return tabs.value.filter((tab: Tab) => !tabsVisibility.value[tab.id]);
+});
+
+const underlineMarkerStyle = computed(() => {
+  const activeTabIndex = tabs.value.findIndex(
+    (tab) => tab.id === activeTab.value.id
+  )
+  // now find the element and get the width of the tab and set the left position of the underline marker
+  const elem = tabElems.value[activeTabIndex] as HTMLElement;
+  if(!elem) return {}
+  const style = {width:elem?.parentElement?.offsetWidth + 'px', left: elem?.parentElement?.offsetLeft + 'px'} 
+  return style
 });
 
 const addTabs = (tab: Tab) => {
@@ -117,13 +128,12 @@ onUnmounted(() => {
           :id="tab.id"
           class="relative flex items-center px-3 py-2 rounded-sm cursor-pointer min-w-max"
           :class="{
-            'border-b-2': activeTab.id === tab.id,
             'opacity-50 !cursor-default': tab.disabled,
           }"
           :style="{
-            color: activeTab.id === tab.id ? props.primaryColor : '',
+            color: activeTab.id === tab.id ? props.themeColor : '',
             borderBottomColor:
-              activeTab.id === tab.id ? props.primaryColor : '',
+              activeTab.id === tab.id ? props.themeColor : '',
           }"
           @click="tab.disabled ? '' : selectTab({tab})"
         >
@@ -143,6 +153,13 @@ onUnmounted(() => {
           />
           {{ tab.value }}
         </div>
+        <div class="underline-marker" 
+          :style="{ 
+            width: underlineMarkerStyle.width, 
+            left: underlineMarkerStyle.left,
+            backgroundColor: props.themeColor
+          }"
+        ></div>
       </div>
 
       <!-- Dropdown -->
@@ -182,9 +199,19 @@ onUnmounted(() => {
   .tabs {
     overflow-x: auto;
     user-select: none;
+    position: relative;
     &::-webkit-scrollbar {
       display: none;
     }
+    .underline-marker{
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      height: 3px;
+      transition: left 0.3s ease;
+      border-radius: 16px;
+    }
+
   }
 
   .dropdown {

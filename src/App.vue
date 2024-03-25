@@ -21,7 +21,6 @@ const tabChanged = (tab: Tab) => {
 
 <template>
   <div style="margin: 0 auto; max-width: 800px">
-  {{ activeTab }}
     <h1 style="margin-top: 30px">This is tab component</h1>
     <div style="margin-bottom: 30px">
       Welcome to Vue Tabs Component library. It helps you to create tabs
