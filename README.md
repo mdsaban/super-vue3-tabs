@@ -72,11 +72,42 @@ You can also pass icons to the tabs using the `icon` slot. The icon will be disp
   </Tabs>
 ```
 
+### Using Event & V-model
+
+You can use the `change` event to listen to tab changes and the `v-model` to bind the active tab value.
+
+```vue
+<template>
+  <Tabs @change="tabChanged" v-model="activeTab">
+    <Tab value="Tab 1">
+      <p>This is the content of Tab 1</p>
+    </Tab>
+    <Tab value="Tab 2">
+      <p>This is the content of Tab 2</p>
+    </Tab>
+    <Tab value="Tab 3">
+      <p>This is the content of Tab 3</p>
+    </Tab>
+  </Tabs>
+</template>
+
+<script setup>
+import { Tabs, Tab } from 'super-vue3-tabs'
+
+const activeTab = ref('Tab 1')
+
+const tabChanged = (tab) => {
+  console.log('Tab changed to', tab)
+}
+</script>
+```
+
 ## Props
 
 ### Tabs Component
 | Prop | Type | Default | Description |
 | --- | --- | --- | --- |
+| v-model | String | - | Current Tab's value |
 | primaryColor | String | #3b82f6 | Theme color of the tab, pass hexcode for custom color |
 
 

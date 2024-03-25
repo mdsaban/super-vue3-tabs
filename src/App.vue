@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import Tabs from "@/components/Tabs.vue";
 import Tab from "@/components/Tab.vue";
+import { ref } from "vue";
 
 // TODO: extract to a separate file
 interface Tab {
@@ -10,14 +11,17 @@ interface Tab {
   computedTabId?: string;
 }
 
+const activeTab = ref("Tab 2");
+
 const tabChanged = (tab: Tab) => {
-  console.log(tab);
+  console.log('tab changed');
 };
 
 </script>
 
 <template>
   <div style="margin: 0 auto; max-width: 800px">
+  {{ activeTab }}
     <h1 style="margin-top: 30px">This is tab component</h1>
     <div style="margin-bottom: 30px">
       Welcome to Vue Tabs Component library. It helps you to create tabs
@@ -27,7 +31,7 @@ const tabChanged = (tab: Tab) => {
     
     <h1 class="mb-4 text-xl font-semibold">Demo 1</h1>
     <div class="p-4 bg-white border rounded-lg">
-      <Tabs @change="tabChanged">
+      <Tabs @change="tabChanged" v-model="activeTab">
         <Tab
           v-for="index in 16"
           :key="index"

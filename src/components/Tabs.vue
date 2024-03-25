@@ -1,6 +1,6 @@
 <script setup lang="ts">
 // This css import is for getting tailwind css
-import '../styles/styles.css';
+import "../styles/styles.css";
 import {
   onMounted,
   onUnmounted,
@@ -22,7 +22,7 @@ interface Tab {
   value: string;
   disabled?: boolean;
   computedTabId?: string;
-  icon?: any
+  icon?: any;
 }
 
 interface TabVisibility {
@@ -34,12 +34,13 @@ const props = withDefaults(defineProps<Props>(), {
 });
 
 const emit = defineEmits<{
-  (e: 'change', tab: Tab): void
+  (e: "change", tab: Tab): void;
 }>();
 
 const tabsContainerRef = ref<HTMLDivElement | null>(null);
 const tabs = ref<Tab[]>([]);
 const activeTab = ref<Tab>({ id: "", value: "" });
+const activeTabValueVModel = defineModel({ default: "" });
 const tabElems = ref<(ComponentPublicInstance | null | Element)[]>([]);
 const tabsVisibility = ref<TabVisibility>({});
 const showDropdown = ref(false);
@@ -72,7 +73,11 @@ const scrollHorizontally = function (e: WheelEvent) {
   tabsContainerRef.value.scrollLeft += e.deltaY;
 };
 
-const selectTab = (tab: Tab) => {
+const selectTab = ({ tab, tabValue }: { tab?: Tab; tabValue?: any }) => {
+  if(!tab && tabValue) {
+    tab = tabs.value.find((tab) => tab.value === tabValue);    
+  }
+  if(!tab) return
   showDropdown.value = false;
   const id = tab.id;
   const tabIndex = tabs.value.findIndex((tab) => tab.id === id);
@@ -85,13 +90,15 @@ const selectTab = (tab: Tab) => {
   }
 
   activeTab.value = tab;
-  emit('change', tab);
+  activeTabValueVModel.value = tab.value;
+  emit("change", tab);
 };
 
 onMounted(() => {
   tabsContainerRef.value?.addEventListener("wheel", scrollHorizontally);
   if (!tabs.value.length) return;
-  selectTab(tabs.value[0]);
+  if(activeTabValueVModel.value) return selectTab({ tabValue: activeTabValueVModel.value})
+  selectTab({tab: tabs.value[0]});
 });
 
 onUnmounted(() => {
@@ -118,7 +125,7 @@ onUnmounted(() => {
             borderBottomColor:
               activeTab.id === tab.id ? props.primaryColor : '',
           }"
-          @click="tab.disabled ? '' : selectTab(tab)"
+          @click="tab.disabled ? '' : selectTab({tab})"
         >
           <div
             class="absolute left-0 right-0 w-1 h-1 m-auto tracker-element"
@@ -128,11 +135,11 @@ onUnmounted(() => {
               }
             "
           ></div>
-          <component 
-            v-if="tab.icon" 
-            v-for="(node, index) in tab.icon()" 
-            :key="index" 
-            :is="node" 
+          <component
+            v-if="tab.icon"
+            v-for="(node, index) in tab.icon()"
+            :key="index"
+            :is="node"
           />
           {{ tab.value }}
         </div>
@@ -147,14 +154,14 @@ onUnmounted(() => {
           <div
             v-for="tab in dropwDownList"
             :key="tab.id"
-            @click="selectTab(tab)"
+            @click="selectTab({tab})"
             class="cursor-pointer"
           >
-            <component 
-              v-if="tab.icon" 
-              v-for="(node, index) in tab.icon()" 
-              :key="index" 
-              :is="node" 
+            <component
+              v-if="tab.icon"
+              v-for="(node, index) in tab.icon()"
+              :key="index"
+              :is="node"
             />
             {{ tab.value }}
           </div>
@@ -179,7 +186,7 @@ onUnmounted(() => {
       display: none;
     }
   }
-  
+
   .dropdown {
     position: absolute;
     background-color: #f8f8f8;
@@ -200,5 +207,5 @@ onUnmounted(() => {
       }
     }
   }
-} 
+}
 </style>
