@@ -62,9 +62,8 @@ const underlineMarkerStyle = computed(() => {
   const activeTabIndex = tabs.value.findIndex(
     (tab) => tab.id === activeTab.value.id
   )
-  // now find the element and get the width of the tab and set the left position of the underline marker
   const elem = tabElems.value[activeTabIndex] as HTMLElement;
-  if(!elem) return {}
+  if(!elem) return {width: '0px', left: '0px'}
   const style = {width:elem?.parentElement?.offsetWidth + 'px', left: elem?.parentElement?.offsetLeft + 'px'} 
   return style
 });
