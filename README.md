@@ -5,6 +5,7 @@ A Vue 3 component for creating tabbed interfaces easily.
 ![Super tabs demo](./github_images/demo.gif)
 
 ## Installation
+Use [npm](https://www.npmjs.com/package/super-vue3-tabs) or yarn to install it
 ```bash
 npm i super-vue3-tabs
 ```
